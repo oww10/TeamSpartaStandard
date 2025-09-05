@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		50178E232E6A606700986991 /* delegateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50178E222E6A606700986991 /* delegateTest.swift */; };
 		5053C0CB2E66F1460079DD90 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5053C0CA2E66F1460079DD90 /* SnapKit */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		50178E222E6A606700986991 /* delegateTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = delegateTest.swift; sourceTree = "<group>"; };
 		5053C0932E66EE8A0079DD90 /* Week2Lesson1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Week2Lesson1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5053C0A92E66EE8B0079DD90 /* Week2Lesson1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Week2Lesson1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5053C0B32E66EE8B0079DD90 /* Week2Lesson1UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Week2Lesson1UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -83,6 +85,7 @@
 		5053C08A2E66EE8A0079DD90 = {
 			isa = PBXGroup;
 			children = (
+				50178E222E6A606700986991 /* delegateTest.swift */,
 				5053C0952E66EE8A0079DD90 /* Week2Lesson1 */,
 				5053C0942E66EE8A0079DD90 /* Products */,
 			);
@@ -240,6 +243,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50178E232E6A606700986991 /* delegateTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

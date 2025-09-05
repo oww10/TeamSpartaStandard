@@ -9,16 +9,26 @@ import SnapKit
  tableView (UITableView)
  datas ([Strings])
  코드베이스, SnapKit 사용
+ 
+ 
+ 델리게이트를 사용해서 해당 셀 레이블의 텍스트 데이터를 추가해보기
+ 
+ didSelectRowAt 구현해보기
+ "셀 선택" 이라는 데이터 추가해보기
  */
+
+
 
 class FirstViewController: UIViewController{
     
-    let datas = ["a","b","c","d","e"]
+    var datas = ["a","b","c"]
     
     let tableView = UITableView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemBlue
+        tableView.backgroundColor = .gray
         configUI()
     }
     
@@ -32,8 +42,7 @@ class FirstViewController: UIViewController{
         
         tableView.snp.makeConstraints{
             make in
-            make.top.equalTo(view.safeAreaLayoutGuide)
-            make.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.edges.equalTo(view.safeAreaLayoutGuide)
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
         }
@@ -42,7 +51,19 @@ class FirstViewController: UIViewController{
     
 }
 
-extension FirstViewController: UITableViewDelegate, UITableViewDataSource{
+extension FirstViewController: UITableViewDelegate, UITableViewDataSource,TableViewDelegateTest{
+    func isButtonTapped(in cell: FirstTableViewCell) {
+        print("123")
+        guard let text = cell.dataLabel.text else {return}
+        datas.append(text)
+        tableView.reloadData()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        datas.append("셀 선택")
+        tableView.reloadData()
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return datas.count
     }
@@ -54,6 +75,7 @@ extension FirstViewController: UITableViewDelegate, UITableViewDataSource{
         
         let data = datas[indexPath.row]
         cell.configure(with: data)
+        cell.delegate = self
         return cell
     }
 }

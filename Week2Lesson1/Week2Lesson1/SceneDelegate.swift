@@ -1,11 +1,9 @@
-//
-//  SceneDelegate.swift
-//  Week2Lesson1
-//
-//  Created by s s on 9/2/25.
-//
+
+
 
 import UIKit
+
+
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
