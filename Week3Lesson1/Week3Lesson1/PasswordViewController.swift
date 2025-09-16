@@ -1,26 +1,37 @@
 import UIKit
 import SnapKit
-
 /*
- UI/레이아웃 요구사항
- 뷰컨트롤러명 : PasswordViewController
+ PasswordValidator 만들기
+
+ 메서드
+ private passwordCheck(with input: String) throws -> Bool
+ passwordCheck 메서드는 private으로 만들기
+ 파라미터명 input, String
+ Bool값 리턴
+ 실제 비밀번호(password)와 입력값을 비교한다.
+ 동일하면 true 반환
+ 다르면 PasswordError.wrongInput throw
+
+ validate(with input: String) throws -> Bool
+ 파라미터명 input, String
+ Bool값 리턴
+ 검증 규칙:
+ 빈 문자열이면 PasswordError.emptyInput throw
+ 8자 초과 입력이면 PasswordError.tooLongInput throw
+ 그 외에는 내부 passwordCheck(with:) 실행
+ 비밀번호가 올바르면 true
+ 틀리면 에러 throw
  
- passwordLabel
- 화면 정가운데 정렬
+ 버튼 동작
+
+ PasswordValidator로 에러를 받으면
+ UIAlertController를 사용해 에러 메세지를 띄우기
+ 받지 않는다면
+ passwordLabel의 text를 성공으로 변경
  
- passwordTextField
- 높이 50
- 좌우 30 인셋
- passwordLabel 위에 위치하며 간격 10
- borderStyle은 roundedRect
- password라고 입력하고 passwordButton을 누르면 passwordLabel text를 "성공"으로 변경
- 
- passwordButton
- passwordLabel 밑에 간격 10 위치, center Label과 맞춤
- Title: 입력
- Width : 100, height : 50
- backgroundColor : red
+ PasswordValidator의 passwordCheck 메서드는 private으로 만들기
  */
+
 enum correctPassword: String{
     case password = "password"
 }
@@ -38,7 +49,7 @@ class PasswordViewController: UIViewController {
         let textField = UITextField()
         textField.text = ""
         textField.borderStyle = .roundedRect
-        
+        textField.autocapitalizationType = .none
         
         return textField
     }()
@@ -49,17 +60,33 @@ class PasswordViewController: UIViewController {
         button.backgroundColor = .red
         return button
     }()
-    
+
     @objc func buttontapped(){
-        if passwordTextField.text == correctPassword.password.rawValue{
+        let checkPassword = PasswordValidator()
+        let alert = UIAlertController(title: "패스워드 알람", message: nil, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "확인", style: .default)
+        alert.addAction(okAction)
+        
+        
+        guard let password = passwordTextField.text else {return}
+        
+        do{
+            _ = try checkPassword.validate(with: password)
             passwordLabel.text = "성공"
-        } else{
-            passwordLabel.text = "실패"
+        } catch let error as PasswordError {
+            alert.message = error.rawValue
+            present(alert,animated: true,completion: nil)
+            
+        } catch{
+            alert.message = "오류 발생"
+            present(alert,animated: true,completion: nil)
         }
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         configuerUI()
         setUpLayer()
         
