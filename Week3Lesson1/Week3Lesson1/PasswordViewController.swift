@@ -66,8 +66,7 @@ class PasswordViewController: UIViewController {
         let alert = UIAlertController(title: "패스워드 알람", message: nil, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "확인", style: .default)
         alert.addAction(okAction)
-        
-        
+
         guard let password = passwordTextField.text else {return}
         
         do{
